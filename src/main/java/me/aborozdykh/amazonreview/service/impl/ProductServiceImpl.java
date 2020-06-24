@@ -4,6 +4,7 @@ import java.util.List;
 import me.aborozdykh.amazonreview.entity.Product;
 import me.aborozdykh.amazonreview.repository.ProductRepository;
 import me.aborozdykh.amazonreview.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProductServiceImpl implements ProductService {
+    @Autowired
     private ProductRepository productRepository;
 
     @Override
@@ -20,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product get(String id) {
-        return productRepository.getOne(id);
+        return productRepository.findById(id).get();
     }
 
     @Override

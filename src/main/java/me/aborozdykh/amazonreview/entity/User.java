@@ -2,6 +2,7 @@ package me.aborozdykh.amazonreview.entity;
 
 import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class User {
     private String id;
     private String profileName;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Review> reviews;
 
     @ManyToMany(fetch = FetchType.EAGER)

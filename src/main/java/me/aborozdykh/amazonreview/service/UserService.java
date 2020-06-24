@@ -8,5 +8,7 @@ public interface UserService {
 
     User get(String id);
 
+    List<User> getAll();
+
     List<User> findMostActiveUsers(String limit);
 }

@@ -1,7 +1,9 @@
 package me.aborozdykh.amazonreview.entity;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -15,7 +17,7 @@ public class Product {
     @Id
     private String id;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER) //, mappedBy = "product", cascade = CascadeType.ALL
     private List<Review> reviews;
 
     public String getId() {
@@ -32,13 +34,5 @@ public class Product {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{"
-                + "id=" + id
-                + ", reviews=" + reviews
-                + '}';
     }
 }

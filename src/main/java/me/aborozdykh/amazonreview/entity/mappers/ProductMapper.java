@@ -1,12 +1,13 @@
 package me.aborozdykh.amazonreview.entity.mappers;
 
 import me.aborozdykh.amazonreview.entity.Product;
-import me.aborozdykh.amazonreview.entity.User;
 import me.aborozdykh.amazonreview.entity.dto.ReviewRequestDto;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Andrii Borozdykh
  */
+@Component
 public class ProductMapper {
     public Product getProductFromReviewRequestDto(ReviewRequestDto reviewRequestDto) {
         if (reviewRequestDto == null) {

@@ -2,7 +2,6 @@ package me.aborozdykh.amazonreview.service.impl;
 
 import java.util.List;
 import me.aborozdykh.amazonreview.entity.Review;
-import me.aborozdykh.amazonreview.entity.dto.ReviewRequestDto;
 import me.aborozdykh.amazonreview.repository.ReviewRepository;
 import me.aborozdykh.amazonreview.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;

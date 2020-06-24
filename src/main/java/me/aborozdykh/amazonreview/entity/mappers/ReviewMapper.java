@@ -5,10 +5,12 @@ import me.aborozdykh.amazonreview.entity.dto.ReviewRequestDto;
 import me.aborozdykh.amazonreview.service.ProductService;
 import me.aborozdykh.amazonreview.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Andrii Borozdykh
  */
+@Component
 public class ReviewMapper {
     @Autowired
     private UserService userService;
@@ -16,7 +18,7 @@ public class ReviewMapper {
     @Autowired
     private ProductService productService;
 
-    public Review getReviewFromReviewRequestDto(ReviewRequestDto reviewRequestDto){
+    public Review getReviewFromReviewRequestDto(ReviewRequestDto reviewRequestDto) {
         var review = new Review();
         review.setId(reviewRequestDto.getId());
         review.setHelpfulnessDenominator(reviewRequestDto.getHelpfulnessDenominator());
