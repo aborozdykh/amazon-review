@@ -101,19 +101,4 @@ public class Review {
     public void setText(String text) {
         this.text = text;
     }
-
-    @Override
-    public String toString() {
-        return "Review{" +
-                "id=" + id +
-                ", product=" + product +
-                ", user=" + user +
-                ", helpfulnessNumerator=" + helpfulnessNumerator +
-                ", helpfulnessDenominator=" + helpfulnessDenominator +
-                ", score=" + score +
-                ", dateTime=" + dateTime +
-                ", summary='" + summary + '\'' +
-                ", text='" + text + '\'' +
-                '}';
-    }
 }
