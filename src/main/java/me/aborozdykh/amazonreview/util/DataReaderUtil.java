@@ -26,14 +26,14 @@ public class DataReaderUtil {
     @Value("${reviewsFile.path}")
     private String filePath;
 
-    public boolean hasCSVFormat(MultipartFile file) {
+    public static boolean hasCSVFormat(MultipartFile file) {
         if (!TYPE.equals(file.getContentType())) {
             return false;
         }
         return true;
     }
 
-    public List<ReviewRequestDto> getDataFromFile(InputStream is) {
+    public static List<ReviewRequestDto> getDataFromFile(InputStream is) {
         try (
                 BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
                 CSVParser csvParser = new CSVParser(fileReader, CSVFormat.DEFAULT

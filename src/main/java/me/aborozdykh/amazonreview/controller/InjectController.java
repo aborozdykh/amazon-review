@@ -57,19 +57,19 @@ public class InjectController {
         roleService.save(Role.of("USER"));
     }
 
-    @PostConstruct
-    public void putDataFromFileToDb() {
-        List<ReviewRequestDto> dataFromFile = dataReader.getDataFromFile();
-        for (ReviewRequestDto reviewRequestDto : dataFromFile) {
-            var user = userMapper.getUserFromReviewRequestDto(reviewRequestDto);
-            userService.save(user);
-            var product = productMapper.getProductFromReviewRequestDto(reviewRequestDto);
-            productService.save(product);
-            var review = reviewMapper.getReviewFromReviewRequestDto(reviewRequestDto);
-//            var reviewList = List.of(review);
-//            user.setReviews(reviewList);
-//            product.setReviews(reviewList);
-            reviewService.save(review);
-        }
-    }
+//    @PostConstruct
+//    public void putDataFromFileToDb() {
+//        List<ReviewRequestDto> dataFromFile = dataReader.getDataFromFile();
+//        for (ReviewRequestDto reviewRequestDto : dataFromFile) {
+//            var user = userMapper.getUserFromReviewRequestDto(reviewRequestDto);
+//            userService.save(user);
+//            var product = productMapper.getProductFromReviewRequestDto(reviewRequestDto);
+//            productService.save(product);
+//            var review = reviewMapper.getReviewFromReviewRequestDto(reviewRequestDto);
+////            var reviewList = List.of(review);
+////            user.setReviews(reviewList);
+////            product.setReviews(reviewList);
+//            reviewService.save(review);
+//        }
+//    }
 }
