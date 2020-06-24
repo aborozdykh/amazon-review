@@ -5,10 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Andrii Borozdykh
  */
+@Getter
+@Setter
 @Entity
 @Table(name = "product")
 public class Product {
@@ -17,28 +21,4 @@ public class Product {
 
     @OneToMany
     private List<Review> reviews;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{"
-                + "id=" + id
-                + ", reviews=" + reviews
-                + '}';
-    }
 }
