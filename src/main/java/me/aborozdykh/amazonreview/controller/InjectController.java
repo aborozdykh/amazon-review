@@ -4,7 +4,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import me.aborozdykh.amazonreview.entity.Role;
 import me.aborozdykh.amazonreview.entity.dto.ReviewRequestDto;
-import me.aborozdykh.amazonreview.repository.RoleRepository;
 import me.aborozdykh.amazonreview.service.DataReader;
 import me.aborozdykh.amazonreview.service.RoleService;
 import org.springframework.stereotype.Controller;
@@ -21,8 +20,8 @@ public class InjectController {
 
     @PostConstruct
     public void insertRolesToDb() {
-        roleService.add(Role.of("ADMIN"));
-        roleService.add(Role.of("USER"));
+        roleService.save(Role.of("ADMIN"));
+        roleService.save(Role.of("USER"));
     }
 
     @PostConstruct

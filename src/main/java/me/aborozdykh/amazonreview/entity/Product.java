@@ -13,16 +13,16 @@ import javax.persistence.Table;
 @Table(name = "product")
 public class Product {
     @Id
-    private Long id;
+    private String id;
 
     @OneToMany
     private List<Review> reviews;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

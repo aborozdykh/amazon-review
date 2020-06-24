@@ -4,7 +4,7 @@ import java.util.List;
 import me.aborozdykh.amazonreview.entity.User;
 
 public interface UserService {
-    User add(User user);
+    User save(User user);
 
     User get(String id);
 

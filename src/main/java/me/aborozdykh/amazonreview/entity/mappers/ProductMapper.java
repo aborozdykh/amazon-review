@@ -1,0 +1,19 @@
+package me.aborozdykh.amazonreview.entity.mappers;
+
+import me.aborozdykh.amazonreview.entity.Product;
+import me.aborozdykh.amazonreview.entity.User;
+import me.aborozdykh.amazonreview.entity.dto.ReviewRequestDto;
+
+/**
+ * @author Andrii Borozdykh
+ */
+public class ProductMapper {
+    public Product getProductFromReviewRequestDto(ReviewRequestDto reviewRequestDto) {
+        if (reviewRequestDto == null) {
+            return null;
+        }
+        var product = new Product();
+        product.setId(reviewRequestDto.getProductId());
+        return product;
+    }
+}
