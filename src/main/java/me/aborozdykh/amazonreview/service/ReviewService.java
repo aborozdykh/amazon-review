@@ -6,6 +6,8 @@ import me.aborozdykh.amazonreview.entity.Review;
 public interface ReviewService {
     Review save(Review review);
 
+    List<Review> saveAll(List<Review> reviews);
+
     Review get(Long id);
 
     List<String> findMostUsedWordsInReview(String limit);

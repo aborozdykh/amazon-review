@@ -21,6 +21,11 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public List<Review> saveAll(List<Review> reviews) {
+        return reviewRepository.saveAll(reviews);
+    }
+
+    @Override
     public Review get(Long id) {
         return reviewRepository.getOne(id);
     }

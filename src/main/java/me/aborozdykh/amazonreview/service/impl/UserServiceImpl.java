@@ -1,6 +1,7 @@
 package me.aborozdykh.amazonreview.service.impl;
 
 import java.util.List;
+import java.util.Set;
 import me.aborozdykh.amazonreview.entity.User;
 import me.aborozdykh.amazonreview.repository.UserRepository;
 import me.aborozdykh.amazonreview.service.UserService;
@@ -18,6 +19,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public List<User> saveAll(Set<User> users) {
+        return userRepository.saveAll(users);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package me.aborozdykh.amazonreview.controller;
 
-import me.aborozdykh.amazonreview.service.DataReader;
-import me.aborozdykh.amazonreview.util.DataReaderUtil;
+import me.aborozdykh.amazonreview.service.DataReaderService;
 import me.aborozdykh.amazonreview.util.ResponseMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,25 +15,27 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 @RequestMapping("/file")
-public class FileController {
-    private final DataReader dataReader;
+public class DataReaderController {
+    private final DataReaderService dataReaderService;
 
-    public FileController(DataReader dataReader) {
-        this.dataReader = dataReader;
+    public DataReaderController(DataReaderService dataReaderService) {
+        this.dataReaderService = dataReaderService;
     }
 
     @PostMapping("/upload")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
 
-        if (DataReaderUtil.hasCSVFormat(file)) {
+        if (dataReaderService.hasCorrectFormat(file)) {
             try {
-                dataReader.save(file);
+                dataReaderService.save(file);
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {
                 message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+                return ResponseEntity
+                        .status(HttpStatus.EXPECTATION_FAILED)
+                        .body(new ResponseMessage(message));
             }
         }
 

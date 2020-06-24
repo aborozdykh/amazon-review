@@ -1,7 +1,6 @@
 package me.aborozdykh.amazonreview.entity;
 
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -16,10 +15,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
     @Id
     private String id;
-    @OneToMany(fetch = FetchType.EAGER) //, mappedBy = "product", cascade = CascadeType.ALL
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private List<Review> reviews;
 }

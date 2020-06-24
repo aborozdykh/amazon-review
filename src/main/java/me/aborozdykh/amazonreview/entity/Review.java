@@ -1,6 +1,7 @@
 package me.aborozdykh.amazonreview.entity;
 
 import java.time.LocalDateTime;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,15 +18,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "review")
+@Table(name = "reviews")
 public class Review {
     @Id
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "product_id")
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "PRODUCT_ID", nullable = false)
     private Product product;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "USER_ID", nullable = false)
     private User user;
     private int helpfulnessNumerator;
     private int helpfulnessDenominator;
@@ -33,6 +36,6 @@ public class Review {
     private LocalDateTime dateTime;
     private String summary;
     @Lob
-    @Column(name = "text", columnDefinition="BLOB")
+    @Column(name = "text", columnDefinition = "BLOB")
     private String text;
 }
