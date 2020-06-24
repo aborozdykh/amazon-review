@@ -22,9 +22,7 @@ public class DateReaderController {
     }
 
     @GetMapping
-    public List<ReviewRequestDto> getReviewsFromFile(){
+    public List<ReviewRequestDto> getReviewsFromFile() {
         return dataReader.getDataFromFile();
     }
-
-
 }
