@@ -10,5 +10,5 @@ public interface ReviewService {
 
     Review get(Long id);
 
-    List<String> findMostUsedWordsInReview(String limit);
+    List<String> findMostUsedWordsInReview(Long limit);
 }

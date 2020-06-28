@@ -13,5 +13,5 @@ public interface UserService {
 
     List<User> getAll();
 
-    List<User> findMostActiveUsers(String limit);
+    List<User> findMostActiveUsers(Long limit, Long offset);
 }

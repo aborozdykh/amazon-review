@@ -8,12 +8,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.TimeZone;
-import java.util.stream.Collectors;
-import me.aborozdykh.amazonreview.entity.Product;
-import me.aborozdykh.amazonreview.entity.Review;
-import me.aborozdykh.amazonreview.entity.User;
 import me.aborozdykh.amazonreview.entity.dto.ReviewRequestDto;
 import me.aborozdykh.amazonreview.entity.mappers.ProductMapper;
 import me.aborozdykh.amazonreview.entity.mappers.ReviewMapper;
@@ -56,29 +51,6 @@ public class DataReaderServiceImpl implements DataReaderService {
     }
 
     @Override
-    public void save(MultipartFile file) {
-        try {
-            List<ReviewRequestDto> dataFromFile = getDataFromFile(file.getInputStream());
-            Set<User> users = dataFromFile
-                    .stream()
-                    .map(userMapper::getUserFromReviewRequestDto)
-                    .collect(Collectors.toSet());
-            userService.saveAll(users);
-            List<Product> products = dataFromFile
-                    .stream()
-                    .map(productMapper::getProductFromReviewRequestDto)
-                    .collect(Collectors.toList());
-            productService.saveAll(products);
-            List<Review> reviews = dataFromFile
-                    .stream()
-                    .map(reviewMapper::getReviewFromReviewRequestDto)
-                    .collect(Collectors.toList());
-            reviewService.saveAll(reviews);
-        } catch (IOException e) {
-            throw new RuntimeException("Fail to store csv data: " + e.getMessage());
-        }
-    }
-
     public boolean hasCorrectFormat(MultipartFile file) {
         if (!TYPE.equals(file.getContentType())) {
             return false;
@@ -86,13 +58,15 @@ public class DataReaderServiceImpl implements DataReaderService {
         return true;
     }
 
-    private List<ReviewRequestDto> getDataFromFile(InputStream is) {
+    @Override
+    public List<ReviewRequestDto> getDataFromFile(InputStream is) {
         try (
                 BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
                 CSVParser csvParser = new CSVParser(fileReader, CSVFormat.DEFAULT
                         .withFirstRecordAsHeader()
                         .withIgnoreHeaderCase()
                         .withTrim());) {
+
             var reviewRequestDtoList = new ArrayList<ReviewRequestDto>();
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 

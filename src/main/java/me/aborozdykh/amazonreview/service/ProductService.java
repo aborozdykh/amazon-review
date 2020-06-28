@@ -10,5 +10,5 @@ public interface ProductService {
 
     Product get(String id);
 
-    List<Product> findMostCommented(String limit);
+    List<Product> findMostCommented(Long limit, Long offset);
 }

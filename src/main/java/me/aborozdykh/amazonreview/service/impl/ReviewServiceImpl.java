@@ -31,7 +31,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<String> findMostUsedWordsInReview(String limit) {
+    public List<String> findMostUsedWordsInReview(Long limit) {
         return null;
     }
 }

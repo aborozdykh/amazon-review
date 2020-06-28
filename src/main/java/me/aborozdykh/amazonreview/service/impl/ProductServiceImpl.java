@@ -31,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findMostCommented(String limit) {
+    public List<Product> findMostCommented(Long limit, Long offset) {
         return null;
     }
 }

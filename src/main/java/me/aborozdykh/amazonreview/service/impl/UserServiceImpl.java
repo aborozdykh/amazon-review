@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findMostActiveUsers(String limit) {
+    public List<User> findMostActiveUsers(Long limit, Long offset) {
         return null;
     }
 }

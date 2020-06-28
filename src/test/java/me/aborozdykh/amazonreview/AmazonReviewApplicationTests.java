@@ -10,4 +10,9 @@ class AmazonReviewApplicationTests {
     void contextLoads() {
     }
 
+    @Test
+    public void isDataReadAndParsedFromCsv(){
+
+    }
+
 }
