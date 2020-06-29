@@ -42,20 +42,32 @@ public class DataToDbSaver {
     }
 
     public void saveToDb(List<ReviewRequestDto> reviewRequestDtoList) {
+        saveUsersToDb(reviewRequestDtoList);
+        saveProductsToDb(reviewRequestDtoList);
+        saveReviewsToDb(reviewRequestDtoList);
+    }
+
+    public List<User> saveUsersToDb(List<ReviewRequestDto> reviewRequestDtoList) {
         Set<User> users = reviewRequestDtoList
                 .stream()
                 .map(userMapper::getUserFromReviewRequestDto)
                 .collect(Collectors.toSet());
-        userService.saveAll(users);
+        return userService.saveAll(users);
+    }
+
+    public List<Product> saveProductsToDb(List<ReviewRequestDto> reviewRequestDtoList) {
         List<Product> products = reviewRequestDtoList
                 .stream()
                 .map(productMapper::getProductFromReviewRequestDto)
                 .collect(Collectors.toList());
-        productService.saveAll(products);
+        return productService.saveAll(products);
+    }
+
+    public List<Review> saveReviewsToDb(List<ReviewRequestDto> reviewRequestDtoList) {
         List<Review> reviews = reviewRequestDtoList
                 .stream()
                 .map(reviewMapper::getReviewFromReviewRequestDto)
                 .collect(Collectors.toList());
-        reviewService.saveAll(reviews);
+        return reviewService.saveAll(reviews);
     }
 }

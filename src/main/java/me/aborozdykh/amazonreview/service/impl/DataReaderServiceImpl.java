@@ -4,19 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 import me.aborozdykh.amazonreview.entity.dto.ReviewRequestDto;
-import me.aborozdykh.amazonreview.entity.mappers.ProductMapper;
-import me.aborozdykh.amazonreview.entity.mappers.ReviewMapper;
-import me.aborozdykh.amazonreview.entity.mappers.UserMapper;
 import me.aborozdykh.amazonreview.service.DataReaderService;
-import me.aborozdykh.amazonreview.service.ProductService;
-import me.aborozdykh.amazonreview.service.ReviewService;
-import me.aborozdykh.amazonreview.service.UserService;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -29,39 +24,17 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class DataReaderServiceImpl implements DataReaderService {
     private static final String TYPE = "text/csv";
-    private final UserMapper userMapper;
-    private final ProductMapper productMapper;
-    private final ReviewMapper reviewMapper;
-    private final UserService userService;
-    private final ProductService productService;
-    private final ReviewService reviewService;
-
-    public DataReaderServiceImpl(UserMapper userMapper,
-                                 ProductMapper productMapper,
-                                 ReviewMapper reviewMapper,
-                                 UserService userService,
-                                 ProductService productService,
-                                 ReviewService reviewService) {
-        this.userMapper = userMapper;
-        this.productMapper = productMapper;
-        this.reviewMapper = reviewMapper;
-        this.userService = userService;
-        this.productService = productService;
-        this.reviewService = reviewService;
-    }
 
     @Override
     public boolean hasCorrectFormat(MultipartFile file) {
-        if (!TYPE.equals(file.getContentType())) {
-            return false;
-        }
-        return true;
+        return TYPE.equals(file.getContentType());
     }
 
     @Override
     public List<ReviewRequestDto> getDataFromFile(InputStream is) {
         try (
-                BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+                BufferedReader fileReader
+                        = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
                 CSVParser csvParser = new CSVParser(fileReader, CSVFormat.DEFAULT
                         .withFirstRecordAsHeader()
                         .withIgnoreHeaderCase()
