@@ -1,5 +1,7 @@
 package me.aborozdykh.amazonreview.util;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class DataToDbSaver {
+    private final int batchSize = 50_000;
     private final UserMapper userMapper;
     private final ProductMapper productMapper;
     private final ReviewMapper reviewMapper;
@@ -56,10 +59,10 @@ public class DataToDbSaver {
     }
 
     public List<Product> saveProductsToDb(List<ReviewRequestDto> reviewRequestDtoList) {
-        List<Product> products = reviewRequestDtoList
+        Set<Product> products = reviewRequestDtoList
                 .stream()
                 .map(productMapper::getProductFromReviewRequestDto)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         return productService.saveAll(products);
     }
 

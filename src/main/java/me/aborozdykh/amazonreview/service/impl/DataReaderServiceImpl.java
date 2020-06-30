@@ -31,10 +31,10 @@ public class DataReaderServiceImpl implements DataReaderService {
     }
 
     @Override
-    public List<ReviewRequestDto> getDataFromFile(InputStream is) {
+    public List<ReviewRequestDto> getDataFromFile(InputStream inputStream) {
         try (
                 BufferedReader fileReader
-                        = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+                        = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
                 CSVParser csvParser = new CSVParser(fileReader, CSVFormat.DEFAULT
                         .withFirstRecordAsHeader()
                         .withIgnoreHeaderCase()
