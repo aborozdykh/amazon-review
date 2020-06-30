@@ -1,6 +1,7 @@
 package me.aborozdykh.amazonreview.service.impl;
 
 import java.util.List;
+import java.util.Set;
 import me.aborozdykh.amazonreview.entity.Product;
 import me.aborozdykh.amazonreview.repository.ProductRepository;
 import me.aborozdykh.amazonreview.service.ProductService;
@@ -21,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> saveAll(List<Product> products) {
+    public List<Product> saveAll(Set<Product> products) {
         return productRepository.saveAll(products);
     }
 

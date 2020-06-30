@@ -24,7 +24,7 @@ public class User {
     private String id;
     private String profileName;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user")
     private List<Review> reviews;
 
     @ManyToMany

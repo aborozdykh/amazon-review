@@ -20,6 +20,6 @@ public class Product {
     @Id
     private String id;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "product")
     private List<Review> reviews;
 }

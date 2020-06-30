@@ -10,9 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductMapper {
     public Product getProductFromReviewRequestDto(ReviewRequestDto reviewRequestDto) {
-        if (reviewRequestDto == null) {
-            return null;
-        }
         var product = new Product();
         product.setId(reviewRequestDto.getProductId());
         return product;
