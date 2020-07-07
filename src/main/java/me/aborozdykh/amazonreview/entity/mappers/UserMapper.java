@@ -11,9 +11,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
     public User getUserFromReviewRequestDto(ReviewRequestDto reviewRequestDto) {
-        if (reviewRequestDto == null) {
-            return null;
-        }
         var user = new User();
         user.setId(reviewRequestDto.getUserId());
         user.setProfileName(reviewRequestDto.getProfileName());

@@ -8,5 +8,5 @@ import org.springframework.web.multipart.MultipartFile;
 public interface DataReaderService {
     boolean hasCorrectFormat(MultipartFile file);
 
-    List<ReviewRequestDto> getDataFromFile(InputStream is);
+    List<ReviewRequestDto> getDataFromFile(InputStream inputStream);
 }

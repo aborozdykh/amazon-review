@@ -1,5 +1,6 @@
 package me.aborozdykh.amazonreview;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -42,6 +43,9 @@ public class DataReaderServiceImplTest {
 
     @Test
     public void getDataFromFileIsOk() throws IOException {
+        var fileInputStream = new FileInputStream("./src/test/resources/test.csv");
+
+
         String id = "1";
         String productId = "B001E4KFG0";
         String userId = "A3SGXH7AUHU8GW";

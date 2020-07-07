@@ -26,9 +26,9 @@ public class DataReaderControllerTest {
     @Test
     public void testUpload() throws Exception {
         String endpoint = "/file/upload";
-        var fis = new FileInputStream("./src/test/resources/test.csv");
+        var fileInputStream = new FileInputStream("./src/test/resources/test.csv");
         var multipartFile
-                = new MockMultipartFile("file", "test.csv", "text/csv", fis);
+                = new MockMultipartFile("file", "test.csv", "text/csv", fileInputStream);
 
         MockHttpServletRequestBuilder builder
                 = MockMvcRequestBuilders
