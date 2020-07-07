@@ -1,10 +1,11 @@
 package me.aborozdykh.amazonreview;
 
-import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.TimeZone;
 import me.aborozdykh.amazonreview.entity.dto.ReviewRequestDto;
 import me.aborozdykh.amazonreview.service.DataReaderService;
@@ -43,9 +44,6 @@ public class DataReaderServiceImplTest {
 
     @Test
     public void getDataFromFileIsOk() throws IOException {
-        var fileInputStream = new FileInputStream("./src/test/resources/test.csv");
-
-
         String id = "1";
         String productId = "B001E4KFG0";
         String userId = "A3SGXH7AUHU8GW";
@@ -79,13 +77,16 @@ public class DataReaderServiceImplTest {
         var actualReviewRequestDtoList = new ArrayList<ReviewRequestDto>();
         actualReviewRequestDtoList.add(reviewRequestDto);
 
-        String content = "Id,ProductId,UserId,ProfileName,HelpfulnessNumerator,"
-                + "HelpfulnessDenominator,Score,Time,Summary,Text\n"
-                + "1,B001E4KFG0,A3SGXH7AUHU8GW,delmartian,1,1,5,1303862400,Good Quality Dog Food,"
-                + "I have bought several of the Vitality canned dog food products and have found "
-                + "them all to be of good quality. The product looks more like a stew than a "
-                + "processed meat and it smells better. My Labrador is finicky and she appreciates"
-                + " this product better than  most.";
+        String filePath = "./src/test/resources/test1.csv";
+        var fileReader = new FileReader(filePath);
+        var scanner = new Scanner(fileReader);
+        var dataFromFile = new StringBuilder();
+        while (scanner.hasNextLine()) {
+            dataFromFile.append(scanner.nextLine()).append("\n");
+        }
+        fileReader.close();
+
+        String content = dataFromFile.toString();
         MockMultipartFile file
                 = new MockMultipartFile("file",
                 "test1.csv",
