@@ -1,11 +1,8 @@
 package me.aborozdykh.amazonreview;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 import java.util.TimeZone;
 import me.aborozdykh.amazonreview.entity.dto.ReviewRequestDto;
 import me.aborozdykh.amazonreview.service.DataReaderService;
@@ -43,57 +40,30 @@ public class DataReaderServiceImplTest {
     }
 
     @Test
-    public void getDataFromFileIsOk() throws IOException {
-        String id = "1";
-        String productId = "B001E4KFG0";
-        String userId = "A3SGXH7AUHU8GW";
-        String profileName = "delmartian";
-        String helpfulnessNumerator = "1";
-        String helpfulnessDenominator = "1";
-        String score = "5";
-        String time = "1303862400";
-        String summary = "Good Quality Dog Food";
-        String text = "I have bought several of the Vitality canned dog food products and have "
-                + "found them all to be of good quality. The product looks more like a stew than "
-                + "a processed meat and it smells better. My Labrador is finicky and she "
-                + "appreciates this product better than  most.";
+    public void getDataFromFileIsOk() {
+        var inputStream = getClass().getClassLoader().getResourceAsStream("test1.csv");
+        var actualReviewRequestDtoList = List.of(getReviewRequestDto());
+        var expectedReviewRequestDtoList = dataReaderService.getDataFromFile(inputStream);
 
-        var reviewRequestDto = new ReviewRequestDto();
-        reviewRequestDto.setId(Long.parseLong(id));
-        reviewRequestDto.setProductId(productId);
-        reviewRequestDto.setUserId(userId);
-        reviewRequestDto.setProfileName(profileName);
-        reviewRequestDto.setHelpfulnessNumerator(
-                Integer.parseInt(helpfulnessNumerator));
-        reviewRequestDto.setHelpfulnessDenominator(
-                Integer.parseInt(helpfulnessDenominator));
-        reviewRequestDto.setScore(Short.parseShort(score));
-        reviewRequestDto.setDateTime(LocalDateTime.ofInstant(
-                Instant.ofEpochSecond(Long.parseLong(time)),
-                TimeZone.getDefault().toZoneId()));
-        reviewRequestDto.setSummary(summary);
-        reviewRequestDto.setText(text);
-
-        var actualReviewRequestDtoList = new ArrayList<ReviewRequestDto>();
-        actualReviewRequestDtoList.add(reviewRequestDto);
-
-        String filePath = "./src/test/resources/test1.csv";
-        var fileReader = new FileReader(filePath);
-        var scanner = new Scanner(fileReader);
-        var dataFromFile = new StringBuilder();
-        while (scanner.hasNextLine()) {
-            dataFromFile.append(scanner.nextLine()).append("\n");
-        }
-        fileReader.close();
-
-        String content = dataFromFile.toString();
-        MockMultipartFile file
-                = new MockMultipartFile("file",
-                "test1.csv",
-                "text/plain",
-                content.getBytes());
-
-        var expectedReviewRequestDtoList = dataReaderService.getDataFromFile(file.getInputStream());
         Assert.assertEquals(actualReviewRequestDtoList, expectedReviewRequestDtoList);
+    }
+
+    private ReviewRequestDto getReviewRequestDto() {
+        var reviewRequestDto = new ReviewRequestDto();
+
+        reviewRequestDto.setId(Long.parseLong("1"));
+        reviewRequestDto.setProductId("B001E4KFG0");
+        reviewRequestDto.setUserId("A3SGXH7AUHU8GW");
+        reviewRequestDto.setProfileName("delmartian");
+        reviewRequestDto.setHelpfulnessNumerator(1);
+        reviewRequestDto.setHelpfulnessDenominator(1);
+        reviewRequestDto.setScore(Short.parseShort("5"));
+        reviewRequestDto.setDateTime(LocalDateTime.ofInstant(
+                Instant.ofEpochSecond(Long.parseLong("1303862400")),
+                TimeZone.getDefault().toZoneId()));
+        reviewRequestDto.setSummary("Good Quality Dog Food");
+        reviewRequestDto.setText("I have bought several.");
+
+        return reviewRequestDto;
     }
 }
