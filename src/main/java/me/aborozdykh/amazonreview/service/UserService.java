@@ -3,6 +3,7 @@ package me.aborozdykh.amazonreview.service;
 import java.util.List;
 import java.util.Set;
 import me.aborozdykh.amazonreview.entity.User;
+import me.aborozdykh.amazonreview.entity.dto.UserReviewsCountDto;
 
 public interface UserService {
     User save(User user);
@@ -13,5 +14,5 @@ public interface UserService {
 
     List<User> getAll();
 
-    List<User> findMostActiveUsers(Long limit, Long offset);
+    List<UserReviewsCountDto> findMostActiveUsers(int page, int limit);
 }
