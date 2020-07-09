@@ -31,3 +31,4 @@ build/
 .vscode/
 /src/main/resources/reviews.csv
 /src/main/resources/small-reviews.csv
+/data/
