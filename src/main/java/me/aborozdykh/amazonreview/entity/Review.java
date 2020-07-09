@@ -1,119 +1,43 @@
 package me.aborozdykh.amazonreview.entity;
 
 import java.time.LocalDateTime;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Andrii Borozdykh
  */
+@Getter
+@Setter
 @Entity
-@Table(name = "review")
+@Table(name = "reviews")
 public class Review {
     @Id
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
+    @ManyToOne(optional = false,
+            cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(optional = false,
+            cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     private int helpfulnessNumerator;
     private int helpfulnessDenominator;
     private short score;
     private LocalDateTime dateTime;
     private String summary;
+    @Lob
+    @Column(name = "text", columnDefinition = "BLOB")
     private String text;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public int getHelpfulnessNumerator() {
-        return helpfulnessNumerator;
-    }
-
-    public void setHelpfulnessNumerator(int helpfulnessNumerator) {
-        this.helpfulnessNumerator = helpfulnessNumerator;
-    }
-
-    public int getHelpfulnessDenominator() {
-        return helpfulnessDenominator;
-    }
-
-    public void setHelpfulnessDenominator(int helpfulnessDenominator) {
-        this.helpfulnessDenominator = helpfulnessDenominator;
-    }
-
-    public short getScore() {
-        return score;
-    }
-
-    public void setScore(short score) {
-        this.score = score;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    @Override
-    public String toString() {
-        return "Review{" +
-                "id=" + id +
-                ", product=" + product +
-                ", user=" + user +
-                ", helpfulnessNumerator=" + helpfulnessNumerator +
-                ", helpfulnessDenominator=" + helpfulnessDenominator +
-                ", score=" + score +
-                ", dateTime=" + dateTime +
-                ", summary='" + summary + '\'' +
-                ", text='" + text + '\'' +
-                '}';
-    }
 }
