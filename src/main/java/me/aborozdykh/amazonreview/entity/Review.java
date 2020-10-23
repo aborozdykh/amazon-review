@@ -11,12 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 /**
  * @author Andrii Borozdykh
  */
 @Getter
 @Setter
+@Indexed
 @Entity
 @Table(name = "reviews")
 public class Review {
@@ -37,6 +40,7 @@ public class Review {
     private short score;
     private LocalDateTime dateTime;
     private String summary;
+    @Field
     @Lob
     @Column(name = "text", columnDefinition = "BLOB")
     private String text;

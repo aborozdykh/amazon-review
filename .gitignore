@@ -30,3 +30,6 @@ build/
 ### VS Code ###
 .vscode/
 /src/main/resources/reviews.csv
+/src/main/resources/small-reviews.csv
+/data/
+/src/main/resources/few-reviews.csv
